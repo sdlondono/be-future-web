@@ -32,7 +32,7 @@ export const calculateMonthsToReachGoal = (
   goal: number,
   interestRate: number
 ) => {
-  const result = (principal * 10) / 100
+  const result = (principal * interestRate) / 100
   const interestRateDecimal = interestRate / 100
   const months = Math.log(goal / result) / Math.log(1 + interestRateDecimal)
   return Math.ceil(months)

@@ -30,9 +30,19 @@ const Proposal = () => {
     confetti()
   }, [])
 
-  const monthNeeded = useMemo(() => {
+  const monthNeededOne = useMemo(() => {
     if (!totalSave || !user?.save) return calculateMonthsToReachGoal(0, 0, 10)
     return calculateMonthsToReachGoal(totalSave, Number(user.save), 10)
+  }, [totalSave, user?.save])
+
+  const monthNeededTwo = useMemo(() => {
+    if (!totalSave || !user?.save) return calculateMonthsToReachGoal(0, 0, 10)
+    return calculateMonthsToReachGoal(totalSave, Number(user.save), 15)
+  }, [totalSave, user?.save])
+
+  const monthNeededThree = useMemo(() => {
+    if (!totalSave || !user?.save) return calculateMonthsToReachGoal(0, 0, 10)
+    return calculateMonthsToReachGoal(totalSave, Number(user.save), 20)
   }, [totalSave, user?.save])
 
   const onClick = () => router.push('/feedback')
@@ -61,8 +71,28 @@ const Proposal = () => {
           <div className="flex">
             <span className="text-xl">
               Si ahorras <span className="font-bold">10%</span> de tus ahorros
-              en <span className="font-bold">{String(monthNeeded)}</span> meses
-              ahorraras{' '}
+              en <span className="font-bold">{String(monthNeededOne)}</span>{' '}
+              meses ahorraras{' '}
+              <span className="font-bold">
+                {formatMoney(Number(user?.save))}
+              </span>{' '}
+            </span>
+          </div>
+          <div className="flex">
+            <span className="text-xl">
+              Si ahorras <span className="font-bold">15%</span> de tus ahorros
+              en <span className="font-bold">{String(monthNeededTwo)}</span>{' '}
+              meses ahorraras{' '}
+              <span className="font-bold">
+                {formatMoney(Number(user?.save))}
+              </span>{' '}
+            </span>
+          </div>
+          <div className="flex">
+            <span className="text-xl">
+              Si ahorras <span className="font-bold">20%</span> de tus ahorros
+              en <span className="font-bold">{String(monthNeededThree)}</span>{' '}
+              meses ahorraras{' '}
               <span className="font-bold">
                 {formatMoney(Number(user?.save))}
               </span>{' '}
