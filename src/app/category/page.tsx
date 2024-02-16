@@ -18,39 +18,7 @@ import { useEffect, useState } from 'react'
 import Button from '@/shared/components/Button'
 import BackButton from '@/shared/components/BackButton'
 import { useRouter } from 'next/navigation'
-
-const CATEGORIES = [
-  {
-    id: 1,
-    name: 'Hogar',
-    Icon: () => <HomeIcon className="w-10 h-10" />
-  },
-  {
-    id: 2,
-    name: 'Transporte',
-    Icon: () => <BuildingOffice2Icon className="w-10 h-10" />
-  },
-  {
-    id: 3,
-    name: 'Alimentación',
-    Icon: () => <CakeIcon className="w-10 h-10" />
-  },
-  {
-    id: 4,
-    name: 'Moda',
-    Icon: () => <ShoppingBagIcon className="w-10 h-10" />
-  },
-  {
-    id: 5,
-    name: 'Salud y bienestar',
-    Icon: () => <HeartIcon className="w-10 h-10" />
-  },
-  {
-    id: 6,
-    name: 'Otros',
-    Icon: () => <QuestionMarkCircleIcon className="w-10 h-10" />
-  }
-]
+import useGetCategories from './hooks/useGetCategories'
 
 const Category = () => {
   const [categoriesBySelected, setCategoriesBySelected] = useState<string[]>([])
@@ -66,6 +34,8 @@ const Category = () => {
     resolver: zodResolver(ZCategoriesSchema),
     mode: 'all'
   })
+
+  const { data } = useGetCategories()
 
   useEffect(() => {
     setValue('categories', categoriesBySelected)
@@ -95,7 +65,7 @@ const Category = () => {
           </SubTitle>
         </div>
         <div className="grid grid-cols-3 gap-3 mt-3">
-          {CATEGORIES.map(({ id, name, Icon }) => {
+          {data.map(({ id, name, Icon }) => {
             const isActive = categoriesBySelected.includes(name)
             const isError = !!errors.categories
             return (

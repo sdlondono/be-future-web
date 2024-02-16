@@ -15,7 +15,7 @@ export default function Home() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isLoading, isSubmitting }
+    formState: { errors }
   } = useForm<IDetails>({
     defaultValues: initialDetailsValue,
     resolver: zodResolver(ZDetailsSchema),
