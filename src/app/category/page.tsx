@@ -5,14 +5,6 @@ import { ICategories } from './types'
 import { ZCategoriesSchema, initialValues } from './constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Title from '@/shared/components/Title'
-import {
-  HomeIcon,
-  BuildingOffice2Icon,
-  CakeIcon,
-  ShoppingBagIcon,
-  HeartIcon,
-  QuestionMarkCircleIcon
-} from '@heroicons/react/24/outline'
 import SubTitle from '@/shared/components/SubTitle'
 import { useEffect, useState } from 'react'
 import Button from '@/shared/components/Button'

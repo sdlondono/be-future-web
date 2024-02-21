@@ -2,7 +2,7 @@
 
 import SubTitle from '@/shared/components/SubTitle'
 import Title from '@/shared/components/Title'
-import useGetUsers from './hooks/useGetUsers'
+import useGetUsers from '../../shared/hooks/useGetUsers'
 import { formatMoney } from '@/shared/utils'
 import Lottie from 'lottie-react'
 import Loading from '@/shared/lottie/loading.json'

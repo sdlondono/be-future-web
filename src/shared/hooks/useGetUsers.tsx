@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/shared/supabase'
 
+type IUser = {
+  id: string
+  fullName: string
+  age: string
+  monthlyIncome: string
+  save: string
+  message: string
+  categories: { name: string; value: string }[]
+  rating: number
+}
+
 function useGetUsers() {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const [data, setData] = useState<
-    {
-      id: string
-      fullName: string
-      age: string
-      monthlyIncome: string
-      save: string
-      message: string
-      categories: { name: string; value: string }[]
-    }[]
-  >([])
+  const [data, setData] = useState<IUser[]>([])
 
   const fetchCategories = async () => {
     try {
@@ -24,14 +25,16 @@ function useGetUsers() {
 
       if (!data) throw new Error('No data received from Supabase')
 
-      const transformPromises = data.map(async (user) => {
-        try {
-          const categories = JSON.parse(user.categories)
-          return { ...user, categories }
-        } catch (parseError) {
-          throw new Error(`Error parsing categories for user ${user.id}`)
-        }
-      })
+      const transformPromises = data
+        .sort((a, b) => b.rating - a.rating)
+        .map(async (user) => {
+          try {
+            const categories = JSON.parse(user.categories)
+            return { ...user, categories }
+          } catch (parseError) {
+            throw new Error(`Error parsing categories for user ${user.id}`)
+          }
+        })
 
       const transformedData = await Promise.all(transformPromises)
 
