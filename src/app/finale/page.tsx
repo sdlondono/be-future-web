@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 const Finale = () => {
   const router = useRouter()
   const onSubmit = () => {
-    router.push('/users')
+    router.push('/')
   }
   return (
     <main className="flex justify-center">
@@ -27,7 +27,7 @@ const Finale = () => {
             <Lottie animationData={Check} loop={false} />
           </div>
           <div>
-            <Button onClick={onSubmit}>Ver usuarios</Button>
+            <Button onClick={onSubmit}>Volver al inicio</Button>
           </div>
         </div>
       </div>
